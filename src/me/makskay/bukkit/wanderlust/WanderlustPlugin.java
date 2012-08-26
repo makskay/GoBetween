@@ -67,7 +67,6 @@ public class WanderlustPlugin extends JavaPlugin {
 			
 			if (getConfig().getString(path + ".x") == null) { // if there's no saved location, bail out
 				player.sendMessage(ChatColor.RED + "No location found for world \"" + args[0] + "\"");
-				getLogger().info("[DEBUG] No location found from file");
 				return true;
 			}
 				
