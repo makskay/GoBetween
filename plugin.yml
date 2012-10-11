@@ -1,13 +1,13 @@
-name: Wanderlust
+name: GoBetween
 description: Saves the last-occupied locations of players who change worlds so that they can easily return to where they left off.
-version: 1.0.0
+version: 1.0
 author: makskay
 
-main: me.makskay.bukkit.wanderlust.WanderlustPlugin
+main: me.makskay.bukkit.gobetween.GoBetweenPlugin
 
 commands:
   go:
     description: Return to where you left off within the specified world.
     usage: /<command> <world-name>
-    permission: wanderlust.go
+    permission: gobetween.go
     permission-message: You don't have permission to return to that world!

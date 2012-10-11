@@ -1,0 +1,8 @@
+# Whether there are any grouped worlds. Grouped worlds save only one location per user.
+enable-world-groups: false
+world-groups:
+  example:
+    - exampleworld
+    - exampleworld2
+  example2:
+    - exampleworld3
