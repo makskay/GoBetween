@@ -1,0 +1,16 @@
+== GoBetween: switch worlds without losing your place ==
+
+== What is GoBetween? ==
+
+=== GoBetween makes teleporting between worlds easy ===
+After traveling to each world that you can access at least once, you'll be able to return to your last known location in each of these worlds by typing ///go <world-name>//.
+
+=== GoBetween understands that your worlds are grouped ===
+As a server administrator, you can enable "worldgroups" in the config.yml file. This powerful feature allows you to treat multiple worlds as if they're one and the same when ///go// is used.
+
+----
+
+== What else should I know about GoBetween? ==
+
+=== GoBetween won't be abandoned any time soon ===
+GoBetween plays a central role on the server I administrate. As long as it's relevant, I'll keep this plugin updated and add new features as I see fit :)

@@ -25,8 +25,8 @@ public class GoBetweenPlugin extends JavaPlugin {
 		configManager = new ConfigAccessor(this, "config.yml");
 		locationsManager = new ConfigAccessor(this, "locations.yml");
 		
-		configManager.saveDefaultConfig();
 		configManager.reloadConfig();
+		configManager.saveDefaultConfig();
 		
 		worldgroupsEnabled = configManager.getConfig().getBoolean("enable-world-groups");
 		
@@ -97,7 +97,7 @@ public class GoBetweenPlugin extends JavaPlugin {
 			
 			String path = "players." + player.getName() + "." + args[0];
 			
-			if (getConfig().getString(path + ".x") == null) { // if there's no saved location, bail out
+			if (locationsManager.getConfig().getString(path + ".world") == null) { // if there's no saved location, bail out
 				player.sendMessage(ChatColor.RED + "No location found for world \"" + args[0] + "\"");
 				return true;
 			}
