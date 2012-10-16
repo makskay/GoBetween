@@ -1,3 +1,6 @@
+# Whether the plugin should automatically install updates from dev.bukkit.org.
+auto-update: true
+
 # Whether there are any grouped worlds. Grouped worlds save only one location per user.
 enable-world-groups: false
 world-groups:
@@ -6,3 +9,7 @@ world-groups:
     - exampleworld2
   example2:
     - exampleworld3
+    
+# Worlds into which players lacking the gobetween.staff permission will be disallowed to teleport using /go.
+ignored-worlds:
+  - exampleworld4

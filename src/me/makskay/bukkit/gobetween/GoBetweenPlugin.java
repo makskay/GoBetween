@@ -14,10 +14,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class GoBetweenPlugin extends JavaPlugin {
 	private HashMap<String, Location> cachedLocations = new HashMap<String, Location>();
-	private ConfigAccessor configManager;
-	private ConfigAccessor locationsManager;
+	private ConfigAccessor configManager, locationsManager;
 	HashSet<WorldGroup> worldGroups = new HashSet<WorldGroup>();
-	boolean worldgroupsEnabled;
+	HashSet<String> ignoredWorlds = new HashSet<String>();
+	boolean autoUpdate, worldgroupsEnabled; // settings that can be changed in config.yml
 	
 	public void onEnable() {
 		Bukkit.getPluginManager().registerEvents(new PlayerListener(this), this);
@@ -28,13 +28,20 @@ public class GoBetweenPlugin extends JavaPlugin {
 		configManager.reloadConfig();
 		configManager.saveDefaultConfig();
 		
+		autoUpdate = configManager.getConfig().getBoolean("auto-update");
 		worldgroupsEnabled = configManager.getConfig().getBoolean("enable-world-groups");
+		ignoredWorlds.addAll(configManager.getConfig().getStringList("ignored-worlds"));
 		
 		if (worldgroupsEnabled) { // build a list of worldgroups
 			for (String key : configManager.getConfig().getConfigurationSection("world-groups").getKeys(false)) {
 				WorldGroup group = new WorldGroup(key, configManager.getConfig().getStringList("world-groups." + key));
 				worldGroups.add(group);
 			}
+		}
+		
+		if (autoUpdate) { // auto-updater stuff
+			@SuppressWarnings("unused")
+			Updater updater = new Updater(this, "aside", this.getFile(), Updater.UpdateType.DEFAULT, false);
 		}
 	}
 	
@@ -80,9 +87,28 @@ public class GoBetweenPlugin extends JavaPlugin {
 				return false;
 			}
 			
-			if (args[0].equals(player.getWorld().getName())) { // can't return to the world you're already in
+			if (args[0].equalsIgnoreCase(player.getWorld().getName())) { // can't return to the world you're already in
 				player.sendMessage(ChatColor.RED + "You're already in world \"" + args[0] + "\"");
 				return true;
+			}
+			
+			if (ignoredWorlds.contains(args[0].toLowerCase()) && !player.hasPermission("gobetween.admin")) {
+				player.sendMessage(ChatColor.RED + "You're not allowed to return to world \"" + args[0] + "\"");
+				return true;
+			}
+			
+			if (worldgroupsEnabled) { // prevent people from teleporting directly into grouped worlds
+				WorldGroup group = null;
+				
+				for (WorldGroup worldgroup : worldGroups) {
+					if (worldgroup.contains(args[0])) {
+						group = worldgroup;
+					}
+				}
+				
+				if (group != null) {
+					args[0] = group.getName();
+				}
 			}
 			
 			Location location = cachedLocations.get(player.getName() + "." + args[0]); // try to get a cached location
