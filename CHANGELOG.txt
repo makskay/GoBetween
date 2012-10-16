@@ -1,3 +1,8 @@
+1.1
+* Players who use /go to teleport directly to a world that is a member of a worldgroup will be teleported to the saved location for the respective worldgroup instead.
+* Added a configurable list of worlds to which users lacking admin permissions cannot teleport directly using /go.
+* Added auto-updating from BukkitDev.
+
 1.0
 * Added /go <world-name> command used to return to your last saved location in a specified world
 * Added world-grouping features used to save a single location between multiple worlds for each player.
