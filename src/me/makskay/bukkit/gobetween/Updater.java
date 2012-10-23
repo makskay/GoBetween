@@ -326,7 +326,6 @@ public class Updater
     /**
      * Part of Zip-File-Extractor, modified by H31IX for use with Bukkit
      */
-	@SuppressWarnings("unchecked")
 	private void unzip(String file) 
     {
         try
@@ -334,6 +333,7 @@ public class Updater
             File fSourceZip = new File(file);
             String zipPath = file.substring(0, file.length()-4);
             ZipFile zipFile = new ZipFile(fSourceZip);
+			@SuppressWarnings("rawtypes")
 			Enumeration e = zipFile.entries();
             while(e.hasMoreElements())
             {

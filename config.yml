@@ -10,6 +10,6 @@ world-groups:
   example2:
     - exampleworld3
     
-# Worlds into which players lacking the gobetween.staff permission will be disallowed to teleport using /go.
+# Worlds into which players lacking the gobetween.admin permission will be disallowed from teleporting using /go.
 ignored-worlds:
   - exampleworld4
